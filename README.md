@@ -6,6 +6,7 @@ This repository allows for the installation of a Python script that adds an appl
 ## Installation
 ### Dependencies
   - The official NordVPN client must be [installed](https://nordvpn.com/download/linux/%22).
+  After installation, make sure you're logged in to NordVPN (`nordvpn login`).
   - Ubuntu packages: `sudo apt-get install -y gir1.2-appindicator python3-gi`
 
 Run the installation script `install.sh`. This will install the application into
@@ -13,9 +14,8 @@ Run the installation script `install.sh`. This will install the application into
 > ./install.sh
 
 The install script will also add an entry into `$HOME/.config/autostart`. On some systems,
-the `$HOME` in `$HOME/.config/autostart/ubuntu-nordvpn-indicator.desktop` may not expand.
-Please edit the file manually to expand it to your absolute home directory and it should
-then get loaded on startup.
+the `$HOME` variable in `~/.config/autostart/ubuntu-nordvpn-indicator.desktop` may not get expanded.
+Please edit the file manually to expand it to an absolute path then and it should all work.
 
 ## Running
 The app can be run as `python3 nordvpn_indicator.py`. When it is running, the status of the VPN is checked every 3 seconds. The icon is set based on whether the VPN is disconnected ![alt text](code/nordvpn_disconnected.png "Disconnected logo") or connected  ![alt text](code/nordvpn_connected.png "Connected logo").
