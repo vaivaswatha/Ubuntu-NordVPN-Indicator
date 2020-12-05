@@ -4,19 +4,19 @@ This repository allows for the installation of a Python script that adds an appl
 
 
 ## Installation
-Run the installation script ```install.sh```
+### Dependencies
+  - The official NordVPN client must be [installed](https://nordvpn.com/download/linux/%22).
+  - Ubuntu packages: `sudo apt-get install -y gir1.2-appindicator python3-gi`
+
+Run the installation script `install.sh`. This will install the application into
+`$HOME/.local/opt/`.
 > ./install.sh
 
-If the package ```nordvpn``` is not found, it will be installed. The python script is added as a startup application. During the installation process, NordVPN will ask for credentials. The status of the VPN is checked every 10 seconds. If no VPN connection is detected, the logo turns blue. When a VPN connection is established, the logo will become green.
+The install script will also add an entry into `$HOME/.config/autostart`.
 
-![alt text](https://raw.githubusercontent.com/yorickvanzweeden/Ubuntu-NordVPN-Indicator/master/code/nordvpn_disconnected.png "Disconnected logo")  ![alt text](https://raw.githubusercontent.com/yorickvanzweeden/Ubuntu-NordVPN-Indicator/master/code/nordvpn_connected.png "Connected logo")
+## Running
+The app can be run as `python3 nordvpn_indicator.py`. When it is running, the status of the VPN is checked every 3 seconds. The icon is set based on whether the VPN is disconnected ![alt text](code/nordvpn_disconnected.png "Disconnected logo") or connected  ![alt text](code/nordvpn_connected.png "Connected logo").
 
 ## Uninstallation
-Run the uninstallation script ```uninstall.sh``` to remove this program. An option will be offered to remove the package ```nordvpn``` as well.
+Run the uninstallation script ```uninstall.sh``` to remove this program.
 > ./uninstall.sh
-
-## Todo
-- Add option to connect to a server at startup
-- Add option to pick which country to connect to
-- Add option to pick a specific server
-- Add option to change status polling frequency

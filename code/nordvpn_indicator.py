@@ -19,7 +19,7 @@ from nordvpn import NordVPN, ConnectionStatus, NordVPNStatus
 
 
 APPINDICATOR_ID = 'nordvpn_tray_icon'
-TIMER_SECONDS = 5.0
+TIMER_SECONDS = 3.0
 
 class Indicator(object):
     """
