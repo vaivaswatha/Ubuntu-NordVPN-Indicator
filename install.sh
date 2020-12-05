@@ -1,42 +1,13 @@
 #!/bin/bash
 
-install_client()
-{
-    # Get NordVPN Repo Setup (https://nordvpn.com/download/linux/)
-    echo "Getting the NordVPN Repo Setup"
-    wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
-
-    # Install downloaded package
-    echo "Installing the NordVPN Repo Setup"
-    sudo apt-get install -y nordvpn-release_1.0.0_all.deb
-    rm nordvpn-release_1.0.0_all.deb
-
-    # Update packages
-    echo "Updating packages"
-    sudo apt-get update
-
-    # Install NordVPN
-    echo "Installing NordVPN"
-    sudo apt-get install -y nordvpn
-
-    # Prompting user to login
-    echo "Logging into NordVPN"
-    nordvpn login
-}
-
-install_deps()
-{
-    # Install gir1.2-appindicator
-    echo "Installing AppIndicator and Python-GI"
-    sudo apt-get install -y gir1.2-appindicator python3-gi
-}
+INSTALL_PATH=${HOME}/.local/opt/ubuntu-nordvpn-indicator/
 
 install_indicator()
 {
     # Installing indicator in opt directory
     echo "Installing Ubuntu NordVPN Indicator"
-    sudo mkdir -p /opt/ubuntu-nordvpn-indicator/
-    sudo cp code/* /opt/ubuntu-nordvpn-indicator/
+    mkdir -p $INSTALL_PATH
+    cp code/* $INSTALL_PATH
 
     # Installing autostart desktop file
     echo "Making sure the indicator starts at boot using autostart"
@@ -47,7 +18,8 @@ install_indicator()
 # Install client if not present
 if ! command -v nordvpn > /dev/null 2>&1;
 then
-    install_client
+    echo "Please install nordvpn: https://nordvpn.com/download/linux/"
+    exit 1
 fi
 
 # Install dependencies if not present
@@ -56,7 +28,8 @@ if [[ $deps_available -eq 2 ]]
 then
     echo "Dependencies have been installed"
 else
-    install_deps
+    echo "Please run sudo apt-get install -y gir1.2-appindicator python3-gi"
+    exit 1
 fi
 
 # Install indicator
@@ -70,6 +43,6 @@ then
 fi
 
 echo "Starting indicator"
-nohup $(command -v python) /opt/ubuntu-nordvpn-indicator/nordvpn_indicator.py >/dev/null 2>&1 &
+nohup $(command -v python3) ${INSTALL_PATH}/nordvpn_indicator.py >/dev/null 2>&1 &
 
 echo "Finished"
