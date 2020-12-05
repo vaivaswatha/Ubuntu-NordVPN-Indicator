@@ -12,7 +12,10 @@ Run the installation script `install.sh`. This will install the application into
 `$HOME/.local/opt/`.
 > ./install.sh
 
-The install script will also add an entry into `$HOME/.config/autostart`.
+The install script will also add an entry into `$HOME/.config/autostart`. On some systems,
+the `$HOME` in `$HOME/.config/autostart/ubuntu-nordvpn-indicator.desktop` may not expand.
+Please edit the file manually to expand it to your absolute home directory and it should
+then get loaded on startup.
 
 ## Running
 The app can be run as `python3 nordvpn_indicator.py`. When it is running, the status of the VPN is checked every 3 seconds. The icon is set based on whether the VPN is disconnected ![alt text](code/nordvpn_disconnected.png "Disconnected logo") or connected  ![alt text](code/nordvpn_connected.png "Connected logo").
